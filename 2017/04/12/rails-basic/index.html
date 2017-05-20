@@ -93,7 +93,7 @@
 <meta property="og:url" content="http://yoursite.com/2017/04/12/rails-basic/index.html">
 <meta property="og:site_name" content="my.huang">
 <meta property="og:description" content="The RESTfulConsider a basic rails controller where you have a series of actions: index, show, new, create, etc. It’s OK when in the starting period the number of this action is limited, but as the num">
-<meta property="og:updated_time" content="2017-05-06T03:34:08.000Z">
+<meta property="og:updated_time" content="2017-05-20T00:36:37.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="rails basic">
 <meta name="twitter:description" content="The RESTfulConsider a basic rails controller where you have a series of actions: index, show, new, create, etc. It’s OK when in the starting period the number of this action is limited, but as the num">
@@ -347,9 +347,12 @@
 /events/show/id     =&gt; GET  /events/id
 /events/update/     =&gt; PATCH /events/id
 /events/destroy/    =&gt; DELETE /events/id
-</code></pre><h1 id="Some-questions-remain-to-be-answered"><a href="#Some-questions-remain-to-be-answered" class="headerlink" title="Some questions remain to be answered."></a>Some questions remain to be answered.</h1><p>the <code>link_to</code> method in rails. <code>link_to(name = nil, options = nil, html_options = nil, &amp;block)</code>. What is the options and html_options? For example<br>  &lt;%= link_to ‘Delete’, @link, method: :destroy, data:{ confirm: ‘Are you sure?’ }, class: “btn btn-default” %&gt;</p>
+</code></pre><h1 id="Some-questions-remain-to-be-answered"><a href="#Some-questions-remain-to-be-answered" class="headerlink" title="Some questions remain to be answered."></a>Some questions remain to be answered.</h1><p>the <code>link_to</code> method in rails. <code>link_to(name = nil, options = nil, html_options = nil, &amp;block)</code>. What is the options and html_options? For example<br>    &lt;%= link_to ‘Delete’, @link, method: :destroy, data:{ confirm: ‘Are you sure?’ }, class: “btn btn-default” %&gt;</p>
 <p>Also, in what situation should we use the <code>&lt;% -%&gt;</code> instead of just <code>&lt;% %&gt;</code>?</p>
-
+<h1 id="Need-to-learn-more-about-the-rails-referer"><a href="#Need-to-learn-more-about-the-rails-referer" class="headerlink" title="Need to learn more about the rails referer."></a>Need to learn more about the rails <code>referer</code>.</h1><h1 id="Learn-how-render-works"><a href="#Learn-how-render-works" class="headerlink" title="Learn how render works"></a>Learn how <code>render</code> works</h1><pre><code>render &apos;new&apos;
+&lt;%= render @post.comments %&gt;
+&lt;%= render &quot;comments/form&quot; %&gt;
+</code></pre>
       
     </div>
 
@@ -546,7 +549,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#The-RESTful"><span class="nav-number">1.</span> <span class="nav-text">The RESTful</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Some-questions-remain-to-be-answered"><span class="nav-number">2.</span> <span class="nav-text">Some questions remain to be answered.</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#The-RESTful"><span class="nav-number">1.</span> <span class="nav-text">The RESTful</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Some-questions-remain-to-be-answered"><span class="nav-number">2.</span> <span class="nav-text">Some questions remain to be answered.</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Need-to-learn-more-about-the-rails-referer"><span class="nav-number">3.</span> <span class="nav-text">Need to learn more about the rails referer.</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Learn-how-render-works"><span class="nav-number">4.</span> <span class="nav-text">Learn how render works</span></a></li></ol></div>
             
 
           </div>
