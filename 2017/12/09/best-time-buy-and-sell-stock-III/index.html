@@ -87,18 +87,18 @@
 
 
 
-<meta name="description" content="这题标准解法还是用2维dp做,对于每天定义4个变量,第一次买/卖,第二次买/卖.他们之间的递推关系也很容易推出(见代码).然后由于i状态只取决于i-1状态,可以将空间复杂度降低到O(n)(1维dp). 12345678910111213141516class Solution &amp;#123;public:    ">
+<meta name="description" content="Say you have an array for which the ith element is the price of a given stock on day i.Design an algorithm to find the maximum profit. You may complete at most ">
 <meta name="keywords" content="leetcode">
 <meta property="og:type" content="article">
-<meta property="og:title" content="best time buy and sell stock III">
+<meta property="og:title" content="123. best time buy and sell stock III">
 <meta property="og:url" content="http://yoursite.com/2017/12/09/best-time-buy-and-sell-stock-III/index.html">
 <meta property="og:site_name" content="my.huang">
-<meta property="og:description" content="这题标准解法还是用2维dp做,对于每天定义4个变量,第一次买/卖,第二次买/卖.他们之间的递推关系也很容易推出(见代码).然后由于i状态只取决于i-1状态,可以将空间复杂度降低到O(n)(1维dp). 12345678910111213141516class Solution &amp;#123;public:    int maxProfit(vector&amp;lt;int&amp;gt;&amp;amp; prices)">
+<meta property="og:description" content="Say you have an array for which the ith element is the price of a given stock on day i.Design an algorithm to find the maximum profit. You may complete at most two transactions.  这题标准解法还是用2维dp做,对于每天定">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2017-12-09T20:39:16.000Z">
+<meta property="og:updated_time" content="2017-12-09T23:42:28.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="best time buy and sell stock III">
-<meta name="twitter:description" content="这题标准解法还是用2维dp做,对于每天定义4个变量,第一次买/卖,第二次买/卖.他们之间的递推关系也很容易推出(见代码).然后由于i状态只取决于i-1状态,可以将空间复杂度降低到O(n)(1维dp). 12345678910111213141516class Solution &amp;#123;public:    int maxProfit(vector&amp;lt;int&amp;gt;&amp;amp; prices)">
+<meta name="twitter:title" content="123. best time buy and sell stock III">
+<meta name="twitter:description" content="Say you have an array for which the ith element is the price of a given stock on day i.Design an algorithm to find the maximum profit. You may complete at most two transactions.  这题标准解法还是用2维dp做,对于每天定">
 
 
 
@@ -132,7 +132,7 @@
 
 
 
-  <title> best time buy and sell stock III | my.huang </title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  <title> 123. best time buy and sell stock III | my.huang </title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="default">
@@ -282,7 +282,7 @@
             
             
               
-                best time buy and sell stock III
+                123. best time buy and sell stock III
               
             
           </h1>
@@ -344,7 +344,10 @@
       
 
       
-        <p>这题标准解法还是用2维dp做,对于每天定义4个变量,第一次买/卖,第二次买/卖.他们之间的递推关系也很容易推出(见代码).然后由于<code>i</code>状态只取决于<code>i-1</code>状态,可以将空间复杂度降低到<code>O(n)</code>(1维dp).</p>
+        <blockquote>
+<p>Say you have an array for which the ith element is the price of a given stock on day i.<br>Design an algorithm to find the maximum profit. You may complete at most two transactions.</p>
+</blockquote>
+<p>这题标准解法还是用2维dp做,对于每天定义4个变量,第一次买/卖,第二次买/卖.他们之间的递推关系也很容易推出(见代码).然后由于<code>i</code>状态只取决于<code>i-1</code>状态,可以将空间复杂度降低到<code>O(n)</code>(1维dp).</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">maxProfit</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; prices)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> dp[<span class="number">2</span>][<span class="number">4</span>] = &#123;INT_MIN, <span class="number">0</span>, INT_MIN, <span class="number">0</span>&#125;;  <span class="comment">// sometime using array is easier than vector</span></span><br><span class="line">        <span class="keyword">int</span> cur = <span class="number">0</span>, next = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; prices.size(); i++)&#123;</span><br><span class="line">            dp[next][<span class="number">0</span>] = max(dp[cur][<span class="number">0</span>], -prices[i]);</span><br><span class="line">            dp[next][<span class="number">1</span>] = max(dp[cur][<span class="number">1</span>], dp[cur][<span class="number">0</span>] + prices[i]);</span><br><span class="line">            dp[next][<span class="number">2</span>] = max(dp[cur][<span class="number">2</span>], dp[cur][<span class="number">1</span>] - prices[i]);</span><br><span class="line">            dp[next][<span class="number">3</span>] = max(dp[cur][<span class="number">3</span>], dp[cur][<span class="number">2</span>] + prices[i]);</span><br><span class="line">            swap(cur, next); <span class="comment">// a tricky strategy for swaping cur and next</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> max(dp[cur][<span class="number">1</span>], dp[cur][<span class="number">3</span>]); <span class="comment">// remember to compare 1 time trade with 2 time trade</span></span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 <p>Even better, 我们可以只用4个变量(或者1维数组)来求解.<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">maxProfit</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; prices)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> hold1 = INT_MIN, hold2 = INT_MIN;</span><br><span class="line">        <span class="keyword">int</span> release1 = <span class="number">0</span>, release2 = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i : prices)&#123;</span><br><span class="line">            release2 = max(release2, hold2+i);     <span class="comment">// The maximum if we've just sold 2nd stock so far.</span></span><br><span class="line">            hold2    = max(hold2,    release1-i);  <span class="comment">// The maximum if we've just buy  2nd stock so far.</span></span><br><span class="line">            release1 = max(release1, hold1+i);     <span class="comment">// The maximum if we've just sold 1nd stock so far.</span></span><br><span class="line">            hold1    = max(hold1,    -i);          <span class="comment">// The maximum if we've just buy  1st stock so far.</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> release2; <span class="comment">///Since release1 is initiated as 0, so release2 will always higher than release1.</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 
@@ -398,6 +401,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/12/09/lexicographical-numbers/" rel="prev" title="386. lexicographical numbers">
+                386. lexicographical numbers <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -467,7 +474,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-count">5</span>
                 <span class="site-state-item-name">posts</span>
               </a>
             </div>
@@ -665,7 +672,7 @@
         var disqus_config = function () {
           this.page.url = 'http://yoursite.com/2017/12/09/best-time-buy-and-sell-stock-III/';
           this.page.identifier = '2017/12/09/best-time-buy-and-sell-stock-III/';
-          this.page.title = 'best time buy and sell stock III';
+          this.page.title = '123. best time buy and sell stock III';
         };
         var d = document, s = d.createElement('script');
         s.src = 'https://https-moyuanhuang-github-io.disqus.com/embed.js';
