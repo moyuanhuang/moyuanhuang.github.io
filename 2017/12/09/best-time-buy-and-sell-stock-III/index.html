@@ -71,7 +71,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="rails,ruby," />
+  <meta name="keywords" content="leetcode," />
 
 
 
@@ -87,18 +87,18 @@
 
 
 
-<meta name="description" content="The RESTfulConsider a basic rails controller where you have a series of actions: index, show, new, create, etc. It’s OK when in the starting period the number o">
-<meta name="keywords" content="rails,ruby">
+<meta name="description" content="这题标准解法还是用2维dp做,对于每天定义4个变量,第一次买/卖,第二次买/卖.他们之间的递推关系也很容易推出(见代码).然后由于i状态只取决于i-1状态,可以将空间复杂度降低到O(n)(1维dp). 12345678910111213141516class Solution &amp;#123;public:    ">
+<meta name="keywords" content="leetcode">
 <meta property="og:type" content="article">
-<meta property="og:title" content="rails basic">
-<meta property="og:url" content="http://yoursite.com/2017/04/12/rails-basic/index.html">
+<meta property="og:title" content="best time buy and sell stock III">
+<meta property="og:url" content="http://yoursite.com/2017/12/09/best-time-buy-and-sell-stock-III/index.html">
 <meta property="og:site_name" content="my.huang">
-<meta property="og:description" content="The RESTfulConsider a basic rails controller where you have a series of actions: index, show, new, create, etc. It’s OK when in the starting period the number of this action is limited, but as the num">
+<meta property="og:description" content="这题标准解法还是用2维dp做,对于每天定义4个变量,第一次买/卖,第二次买/卖.他们之间的递推关系也很容易推出(见代码).然后由于i状态只取决于i-1状态,可以将空间复杂度降低到O(n)(1维dp). 12345678910111213141516class Solution &amp;#123;public:    int maxProfit(vector&amp;lt;int&amp;gt;&amp;amp; prices)">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2017-12-09T19:47:58.000Z">
+<meta property="og:updated_time" content="2017-12-09T20:39:16.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="rails basic">
-<meta name="twitter:description" content="The RESTfulConsider a basic rails controller where you have a series of actions: index, show, new, create, etc. It’s OK when in the starting period the number of this action is limited, but as the num">
+<meta name="twitter:title" content="best time buy and sell stock III">
+<meta name="twitter:description" content="这题标准解法还是用2维dp做,对于每天定义4个变量,第一次买/卖,第二次买/卖.他们之间的递推关系也很容易推出(见代码).然后由于i状态只取决于i-1状态,可以将空间复杂度降低到O(n)(1维dp). 12345678910111213141516class Solution &amp;#123;public:    int maxProfit(vector&amp;lt;int&amp;gt;&amp;amp; prices)">
 
 
 
@@ -126,13 +126,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2017/04/12/rails-basic/"/>
+  <link rel="canonical" href="http://yoursite.com/2017/12/09/best-time-buy-and-sell-stock-III/"/>
 
 
 
 
 
-  <title> rails basic | my.huang </title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  <title> best time buy and sell stock III | my.huang </title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="default">
@@ -261,7 +261,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/04/12/rails-basic/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/12/09/best-time-buy-and-sell-stock-III/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Moyuan Huang">
@@ -282,7 +282,7 @@
             
             
               
-                rails basic
+                best time buy and sell stock III
               
             
           </h1>
@@ -297,8 +297,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-04-12T17:58:19-07:00">
-                2017-04-12
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-12-09T11:48:59-08:00">
+                2017-12-09
               </time>
             
 
@@ -316,9 +316,9 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2017/04/12/rails-basic/#comments" itemprop="discussionUrl">
+                <a href="/2017/12/09/best-time-buy-and-sell-stock-III/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2017/04/12/rails-basic/" itemprop="commentCount"></span>
+                        data-disqus-identifier="2017/12/09/best-time-buy-and-sell-stock-III/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -344,17 +344,10 @@
       
 
       
-        <h1 id="The-RESTful"><a href="#The-RESTful" class="headerlink" title="The RESTful"></a>The RESTful</h1><p>Consider a basic rails controller where you have a series of actions: index, show, new, create, etc. It’s OK when in the starting period the number of this action is limited, but as the number of actions strat to grow, you may mess up with all those actions and result in a big messy controller. REST(Representational State Transfer) is thus designed for arranging those actions, by setup some rules or styles for the web service.</p>
-<pre><code>/events/create/     =&gt; POST /events
-/events/show/id     =&gt; GET  /events/id
-/events/update/     =&gt; PATCH /events/id
-/events/destroy/    =&gt; DELETE /events/id
-</code></pre><h1 id="Some-questions-remain-to-be-answered"><a href="#Some-questions-remain-to-be-answered" class="headerlink" title="Some questions remain to be answered."></a>Some questions remain to be answered.</h1><p>the <code>link_to</code> method in rails. <code>link_to(name = nil, options = nil, html_options = nil, &amp;block)</code>. What is the options and html_options? For example<br>    &lt;%= link_to ‘Delete’, @link, method: :destroy, data:{ confirm: ‘Are you sure?’ }, class: “btn btn-default” %&gt;</p>
-<p>Also, in what situation should we use the <code>&lt;% -%&gt;</code> instead of just <code>&lt;% %&gt;</code>?</p>
-<h1 id="Need-to-learn-more-about-the-rails-referer"><a href="#Need-to-learn-more-about-the-rails-referer" class="headerlink" title="Need to learn more about the rails referer."></a>Need to learn more about the rails <code>referer</code>.</h1><h1 id="Learn-how-render-works"><a href="#Learn-how-render-works" class="headerlink" title="Learn how render works"></a>Learn how <code>render</code> works</h1><pre><code>render &apos;new&apos;
-&lt;%= render @post.comments %&gt;
-&lt;%= render &quot;comments/form&quot; %&gt;
-</code></pre><h1 id="a-good-website-for-bootstrap-here"><a href="#a-good-website-for-bootstrap-here" class="headerlink" title="a good website for bootstrap. here"></a>a good website for bootstrap. <a href="https://www.w3schools.com/bootstrap/bootstrap_buttons.asp" target="_blank" rel="noopener">here</a></h1>
+        <p>这题标准解法还是用2维dp做,对于每天定义4个变量,第一次买/卖,第二次买/卖.他们之间的递推关系也很容易推出(见代码).然后由于<code>i</code>状态只取决于<code>i-1</code>状态,可以将空间复杂度降低到<code>O(n)</code>(1维dp).</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">maxProfit</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; prices)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> dp[<span class="number">2</span>][<span class="number">4</span>] = &#123;INT_MIN, <span class="number">0</span>, INT_MIN, <span class="number">0</span>&#125;;  <span class="comment">// sometime using array is easier than vector</span></span><br><span class="line">        <span class="keyword">int</span> cur = <span class="number">0</span>, next = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; prices.size(); i++)&#123;</span><br><span class="line">            dp[next][<span class="number">0</span>] = max(dp[cur][<span class="number">0</span>], -prices[i]);</span><br><span class="line">            dp[next][<span class="number">1</span>] = max(dp[cur][<span class="number">1</span>], dp[cur][<span class="number">0</span>] + prices[i]);</span><br><span class="line">            dp[next][<span class="number">2</span>] = max(dp[cur][<span class="number">2</span>], dp[cur][<span class="number">1</span>] - prices[i]);</span><br><span class="line">            dp[next][<span class="number">3</span>] = max(dp[cur][<span class="number">3</span>], dp[cur][<span class="number">2</span>] + prices[i]);</span><br><span class="line">            swap(cur, next); <span class="comment">// a tricky strategy for swaping cur and next</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> max(dp[cur][<span class="number">1</span>], dp[cur][<span class="number">3</span>]); <span class="comment">// remember to compare 1 time trade with 2 time trade</span></span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>Even better, 我们可以只用4个变量(或者1维数组)来求解.<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">maxProfit</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; prices)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> hold1 = INT_MIN, hold2 = INT_MIN;</span><br><span class="line">        <span class="keyword">int</span> release1 = <span class="number">0</span>, release2 = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i : prices)&#123;</span><br><span class="line">            release2 = max(release2, hold2+i);     <span class="comment">// The maximum if we've just sold 2nd stock so far.</span></span><br><span class="line">            hold2    = max(hold2,    release1-i);  <span class="comment">// The maximum if we've just buy  2nd stock so far.</span></span><br><span class="line">            release1 = max(release1, hold1+i);     <span class="comment">// The maximum if we've just sold 1nd stock so far.</span></span><br><span class="line">            hold1    = max(hold1,    -i);          <span class="comment">// The maximum if we've just buy  1st stock so far.</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> release2; <span class="comment">///Since release1 is initiated as 0, so release2 will always higher than release1.</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+
       
     </div>
 
@@ -383,9 +376,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/rails/" rel="tag"># rails</a>
-          
-            <a href="/tags/ruby/" rel="tag"># ruby</a>
+            <a href="/tags/leetcode/" rel="tag"># leetcode</a>
           
         </div>
       
@@ -398,8 +389,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/04/01/link/" rel="next" title="link">
-                <i class="fa fa-chevron-left"></i> link
+              <a href="/2017/12/04/urlpoll/" rel="next" title="Golang code walk: share memory by communicating">
+                <i class="fa fa-chevron-left"></i> Golang code walk: share memory by communicating
               </a>
             
           </div>
@@ -407,10 +398,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/12/04/urlpoll/" rel="prev" title="Golang code walk: share memory by communicating">
-                Golang code walk: share memory by communicating <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -464,17 +451,8 @@
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
-            Table of Contents
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview">
-            Overview
-          </li>
-        </ul>
-      
 
-      <section class="site-overview sidebar-panel">
+      <section class="site-overview sidebar-panel sidebar-panel-active">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.png"
@@ -547,22 +525,6 @@
 
       </section>
 
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#The-RESTful"><span class="nav-number">1.</span> <span class="nav-text">The RESTful</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Some-questions-remain-to-be-answered"><span class="nav-number">2.</span> <span class="nav-text">Some questions remain to be answered.</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Need-to-learn-more-about-the-rails-referer"><span class="nav-number">3.</span> <span class="nav-text">Need to learn more about the rails referer.</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Learn-how-render-works"><span class="nav-number">4.</span> <span class="nav-text">Learn how render works</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#a-good-website-for-bootstrap-here"><span class="nav-number">5.</span> <span class="nav-text">a good website for bootstrap. here</span></a></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
       
 
       
@@ -701,9 +663,9 @@
     
       <script type="text/javascript">
         var disqus_config = function () {
-          this.page.url = 'http://yoursite.com/2017/04/12/rails-basic/';
-          this.page.identifier = '2017/04/12/rails-basic/';
-          this.page.title = 'rails basic';
+          this.page.url = 'http://yoursite.com/2017/12/09/best-time-buy-and-sell-stock-III/';
+          this.page.identifier = '2017/12/09/best-time-buy-and-sell-stock-III/';
+          this.page.title = 'best time buy and sell stock III';
         };
         var d = document, s = d.createElement('script');
         s.src = 'https://https-moyuanhuang-github-io.disqus.com/embed.js';
