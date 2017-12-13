@@ -1,0 +1,792 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="default">
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="golang," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="referenced: http://www.tapirgames.com/blog/golang-channel-closing 文章首先说明了一个问题:对于go语言中的channel,官方没有给出一个内建的fun closed(c chan T) bool方法来检查一个管道是不是已经关闭了.然后还指出了即使有,等你">
+<meta name="keywords" content="golang">
+<meta property="og:type" content="article">
+<meta property="og:title" content="如何优雅地关闭channel">
+<meta property="og:url" content="http://yoursite.com/2017/12/13/how-should-we-close-channel/index.html">
+<meta property="og:site_name" content="my.huang">
+<meta property="og:description" content="referenced: http://www.tapirgames.com/blog/golang-channel-closing 文章首先说明了一个问题:对于go语言中的channel,官方没有给出一个内建的fun closed(c chan T) bool方法来检查一个管道是不是已经关闭了.然后还指出了即使有,等你得到结果的时候管道的状态很可能又改变了…你得到的永远是前一刻的状态(mmp啊).">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2017-12-13T18:50:55.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="如何优雅地关闭channel">
+<meta name="twitter:description" content="referenced: http://www.tapirgames.com/blog/golang-channel-closing 文章首先说明了一个问题:对于go语言中的channel,官方没有给出一个内建的fun closed(c chan T) bool方法来检查一个管道是不是已经关闭了.然后还指出了即使有,等你得到结果的时候管道的状态很可能又改变了…你得到的永远是前一刻的状态(mmp啊).">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/12/13/how-should-we-close-channel/"/>
+
+
+
+
+
+  <title> 如何优雅地关闭channel | my.huang </title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">my.huang</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/12/13/how-should-we-close-channel/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Moyuan Huang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="my.huang">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                如何优雅地关闭channel
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-12-13T10:47:40-08:00">
+                2017-12-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/12/13/how-should-we-close-channel/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2017/12/13/how-should-we-close-channel/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>referenced: <a href="http://www.tapirgames.com/blog/golang-channel-closing" target="_blank" rel="noopener">http://www.tapirgames.com/blog/golang-channel-closing</a></p>
+<p>文章首先说明了一个问题:对于go语言中的channel,官方没有给出一个内建的<code>fun closed(c chan T) bool</code>方法来检查一个管道是不是已经关闭了.然后还指出了即使有,等你得到结果的时候管道的状态很可能又改变了…你得到的永远是前一刻的状态(mmp啊).</p>
+<p>作者提出了一个比较合理的关闭管道的原则:<br>不要从接收端关闭channel，也不要关闭有多个并发发送者的channel。换句话说，如果sender(发送者)只是唯一的sender或者是channel最后一个活跃的sender，那么你应该在sender的goroutine关闭channel，从而通知receiver(s)(接收者们)已经没有值可以读了.这个对于concurrency的<a href="https://udhos.github.io/golang-concurrency-tricks/" target="_blank" rel="noopener">总结</a>很有用.</p>
+<p>然后作者按着这个规则,给不同的关管道方式做了评级…</p>
+<h3 id="低级关闭"><a href="#低级关闭" class="headerlink" title="低级关闭"></a>低级关闭</h3><ol>
+<li><p>下面这个函数在接收端关闭了管道</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">SafeClose</span><span class="params">(ch <span class="keyword">chan</span> T)</span> <span class="params">(justClosed <span class="keyword">bool</span>)</span></span> &#123;</span><br><span class="line">	<span class="keyword">defer</span> <span class="function"><span class="keyword">func</span><span class="params">()</span></span> &#123;</span><br><span class="line">		<span class="keyword">if</span> <span class="built_in">recover</span>() != <span class="literal">nil</span> &#123;</span><br><span class="line">			justClosed = <span class="literal">false</span></span><br><span class="line">		&#125;</span><br><span class="line">	&#125;()</span><br><span class="line"></span><br><span class="line">	<span class="comment">// assume ch != nil here.</span></span><br><span class="line">	<span class="built_in">close</span>(ch) <span class="comment">// panic if ch is closed</span></span><br><span class="line">	<span class="keyword">return</span> <span class="literal">true</span> <span class="comment">// &lt;=&gt; justClosed = true; return</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>下面这个函数在多个发送端关闭管道</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">SafeSend</span><span class="params">(ch <span class="keyword">chan</span> T, value T)</span> <span class="params">(closed <span class="keyword">bool</span>)</span></span> &#123;</span><br><span class="line">	<span class="keyword">defer</span> <span class="function"><span class="keyword">func</span><span class="params">()</span></span> &#123;</span><br><span class="line">		<span class="keyword">if</span> <span class="built_in">recover</span>() != <span class="literal">nil</span> &#123;</span><br><span class="line">			<span class="comment">// The return result can be altered</span></span><br><span class="line">			<span class="comment">// in a defer function call.</span></span><br><span class="line">			closed = <span class="literal">true</span></span><br><span class="line">		&#125;</span><br><span class="line">	&#125;()</span><br><span class="line"></span><br><span class="line">	ch &lt;- value <span class="comment">// panic if ch is closed</span></span><br><span class="line">	<span class="keyword">return</span> <span class="literal">false</span> <span class="comment">// &lt;=&gt; closed = false; return</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>顺便分析一下这个函数的性能: channel没有关闭的时候,<code>SafeSend()</code>的性能跟<code>ch &lt;- value</code>几乎一样;当channel关闭之后,每个sender的goroutine会执行1次<code>recover()</code>,对性能的影响不是很大.然而你还是打破了原则啊</p>
+<h3 id="中级关闭"><a href="#中级关闭" class="headerlink" title="中级关闭"></a>中级关闭</h3><p>作者提出用golang中内建的<code>Once/Mutex</code>结构实现管道的关闭.<br><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> MyChannel <span class="keyword">struct</span>&#123;</span><br><span class="line">    ch <span class="keyword">chan</span> T</span><br><span class="line">    once sync.Once</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">NewMyChannel</span><span class="params">()</span> *<span class="title">MyChannel</span></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> &amp;MyChannel&#123;ch: <span class="built_in">make</span>(<span class="keyword">chan</span> T)&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(mych *MyChannel)</span> <span class="title">SafeClose</span><span class="params">()</span></span> &#123;</span><br><span class="line">    mych.once.Do(<span class="function"><span class="keyword">func</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="built_in">close</span>(mych.ch)</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>这里将T类型的channel和一个<code>sync.Once</code>对象封装在一起,这样对于每一个channel,<code>once.Do</code>使得<code>close()</code>只会被调用一次.</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> MyChannel <span class="keyword">struct</span>&#123;</span><br><span class="line">    ch <span class="keyword">chan</span> T</span><br><span class="line">    closed <span class="keyword">bool</span></span><br><span class="line">    mutex sync.Mutex</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">NewMyChannel</span><span class="params">()</span> *<span class="title">MyChannel</span></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> &amp;MyChannel&#123;ch: <span class="built_in">make</span>(<span class="keyword">chan</span> T)&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(mych *MyChannel)</span> <span class="title">SafeClose</span><span class="params">()</span></span>&#123;</span><br><span class="line">    mych.mutex.lock()</span><br><span class="line">    <span class="keyword">if</span> !mych.closed &#123;</span><br><span class="line">        <span class="built_in">close</span>(mych.ch)</span><br><span class="line">        mych.closed = <span class="literal">true</span></span><br><span class="line">    &#125;</span><br><span class="line">    mych.mutex.unlock()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>注意:不管用哪种方法实现,<code>SafeClose()</code><strong>都应该在Sender端被调用</strong>,这是之前提到的close principle.</p>
+<h3 id="高级关闭"><a href="#高级关闭" class="headerlink" title="高级关闭"></a>高级关闭</h3><p>这里讨论了三种情况:<br>这里的三种方法都是通过<code>sync.WaitGroup</code>实现的.具体的用法在<a href="https://golang.org/pkg/sync/#WaitGroup.Add" target="_blank" rel="noopener">这里</a></p>
+<ol>
+<li><p>1个发送者,M个接收者:由发送者告诉所有接受者”我再也不发东西了!”(关闭管道)</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">    <span class="string">"sync"</span></span><br><span class="line">    <span class="string">"log"</span></span><br><span class="line">    <span class="string">"time"</span></span><br><span class="line">    <span class="string">"math/rand"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    rand.Seed(time.Now.UnixNano())</span><br><span class="line">    log.SetFlags(<span class="number">0</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> MaxRandomNumber = <span class="number">100000</span></span><br><span class="line">	<span class="keyword">const</span> NumReceivers = <span class="number">100</span></span><br><span class="line"></span><br><span class="line">    wgRecveivers := sync.WaitGroup&#123;&#125;</span><br><span class="line">    waitGroup.add(NumReceivers)</span><br><span class="line"></span><br><span class="line">    dataCh := <span class="built_in">make</span>(<span class="keyword">chan</span> <span class="keyword">int</span>)</span><br><span class="line">    <span class="comment">// sender</span></span><br><span class="line">    <span class="keyword">go</span> <span class="function"><span class="keyword">func</span><span class="params">()</span></span> &#123;</span><br><span class="line">        <span class="keyword">for</span> &#123;</span><br><span class="line">            <span class="keyword">if</span> value := rand.Intn(MaxRandomNumber) == <span class="number">0</span> &#123;</span><br><span class="line">                <span class="built_in">close</span>(dataCh)</span><br><span class="line">                <span class="keyword">return</span></span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span>&#123;</span><br><span class="line">                dataCh &lt;- value</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;()</span><br><span class="line"></span><br><span class="line">    <span class="comment">// receiver</span></span><br><span class="line">    <span class="keyword">for</span> i := <span class="number">0</span>; i &lt; NumReceivers; i++ &#123;</span><br><span class="line">        <span class="keyword">go</span> <span class="function"><span class="keyword">func</span><span class="params">()</span></span>&#123;</span><br><span class="line">            <span class="keyword">defer</span> wgRecveivers.Done()</span><br><span class="line"></span><br><span class="line">            <span class="keyword">for</span> data := <span class="keyword">range</span> dataCh &#123;</span><br><span class="line">                log.Println(value)</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;()</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    wgRecveivers.wait()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>N个发送者,1个接收者:有接受者跟所有发送者收”别再给我发东西了!”</p>
+</li>
+<li>N个发送者,M个接收者:通过一个moderator进行信息交互<br>这个真的太难了…分为两种情况:<ul>
+<li>所有的sender都会在某个时间点自动停止发送,像这个<a href="https://play.golang.org/p/YcBG0dRitk" target="_blank" rel="noopener">例子</a>.这个时候使用WaitGroup可以完美解决这个问题</li>
+<li>某个sender会在某个时间关闭管道.比如前面的例子:每个goroutine随机生成整数直到某个线程随机到0,该线程会把channel关闭.<strong>未解之谜</strong>…好像从设计的角度讲不应该有这种goroutine出现.</li>
+</ul>
+</li>
+</ol>
+<p>默认认为第一种情况比较常见,如果出现第二种情况,我觉得就应该重新设计模块了吧</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/golang/" rel="tag"># golang</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/12/09/lexicographical-numbers/" rel="next" title="386. lexicographical numbers">
+                <i class="fa fa-chevron-left"></i> 386. lexicographical numbers
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.png"
+               alt="Moyuan Huang" />
+          <p class="site-author-name" itemprop="name">Moyuan Huang</p>
+           
+              <p class="site-description motion-element" itemprop="description">manners maketh man.</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-name">posts</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-name">tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://www.linkedin.com/in/moyuan-huang-77a805132/" target="_blank" title="LinkedIn">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  LinkedIn
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/moyuanhuang" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#低级关闭"><span class="nav-number">1.</span> <span class="nav-text">低级关闭</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#中级关闭"><span class="nav-number">2.</span> <span class="nav-text">中级关闭</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#高级关闭"><span class="nav-number">3.</span> <span class="nav-text">高级关闭</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Moyuan Huang</span>
+</div>
+
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="https://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://https-moyuanhuang-github-io.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://yoursite.com/2017/12/13/how-should-we-close-channel/';
+          this.page.identifier = '2017/12/13/how-should-we-close-channel/';
+          this.page.title = '如何优雅地关闭channel';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://https-moyuanhuang-github-io.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config("");
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="custom_mathjax_source">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

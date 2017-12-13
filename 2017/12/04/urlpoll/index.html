@@ -71,7 +71,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Golang," />
+  <meta name="keywords" content="golang," />
 
 
 
@@ -88,14 +88,14 @@
 
 
 <meta name="description" content="Go example code中的 urlpoll.go实现在这里. Go interfacesChannelExample usage here. Channel is a FIFO queue, the send and receive sequence will always be the same. 1ch :">
-<meta name="keywords" content="Golang">
+<meta name="keywords" content="golang">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Golang code walk: share memory by communicating">
 <meta property="og:url" content="http://yoursite.com/2017/12/04/urlpoll/index.html">
 <meta property="og:site_name" content="my.huang">
 <meta property="og:description" content="Go example code中的 urlpoll.go实现在这里. Go interfacesChannelExample usage here. Channel is a FIFO queue, the send and receive sequence will always be the same. 1ch := make(chan int, 100)  // constructor of">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2017-12-06T03:19:07.000Z">
+<meta property="og:updated_time" content="2017-12-12T17:45:59.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Golang code walk: share memory by communicating">
 <meta name="twitter:description" content="Go example code中的 urlpoll.go实现在这里. Go interfacesChannelExample usage here. Channel is a FIFO queue, the send and receive sequence will always be the same. 1ch := make(chan int, 100)  // constructor of">
@@ -348,6 +348,7 @@
 <h1 id="Go-interfaces"><a href="#Go-interfaces" class="headerlink" title="Go interfaces"></a>Go interfaces</h1><h2 id="Channel"><a href="#Channel" class="headerlink" title="Channel"></a>Channel</h2><p>Example usage <a href="http://colobu.com/2016/04/14/Golang-Channels/" target="_blank" rel="noopener">here</a>. Channel is a FIFO queue, the send and receive sequence will always be the same.</p>
 <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ch := <span class="built_in">make</span>(<span class="keyword">chan</span> <span class="keyword">int</span>, <span class="number">100</span>)  <span class="comment">// constructor of a Channel with capacity of 100</span></span><br></pre></td></tr></table></figure>
 <p>如果没有设置容量, 或者容量设置为0, 说明Channel没有缓存, 只有sender和receiver都准备好了后它们的通讯(communication)才会发生(Blocking). 如果设置了缓存, 就有可能不发生阻塞, 只有buffer满了后send才会阻塞,而只有缓存空了后receive才会阻塞。一个nil channel不会通信。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    ch1 := <span class="built_in">make</span>(<span class="keyword">chan</span> <span class="keyword">int</span>, <span class="number">100</span>)</span><br><span class="line">    ch2 := <span class="built_in">make</span>(<span class="keyword">chan</span> <span class="keyword">int</span>)</span><br><span class="line"></span><br><span class="line">    ch1 &lt;- <span class="number">1</span> <span class="comment">// valid, the data will be stored in the buffer</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// ch2 &lt;- 2  // invalid, the main would be blocked forever</span></span><br><span class="line">    <span class="comment">// https://stackoverflow.com/questions/36505012/go-fatal-error-all-goroutines-are-asleep-deadlock</span></span><br><span class="line">    <span class="keyword">go</span> <span class="function"><span class="keyword">func</span><span class="params">()</span></span>&#123;</span><br><span class="line">        ch2 &lt;- <span class="number">2</span>  <span class="comment">// if the channel doesn't have buffer, must use goroutine to write and read data</span></span><br><span class="line">    &#125;()</span><br><span class="line"></span><br><span class="line">    time.Sleep(<span class="number">5000</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">ch &lt;- v  <span class="comment">// send v into Channel ch</span></span><br><span class="line">v := &lt;- v  <span class="comment">// receive data from Channel ch</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">chan</span> T  <span class="comment">// 双向管道</span></span><br><span class="line"><span class="keyword">chan</span>&lt;- <span class="keyword">float64</span>  <span class="comment">// 只用来 发送 float64类型的数据</span></span><br><span class="line">&lt;-<span class="keyword">chan</span> <span class="keyword">int</span>  <span class="comment">// 只用来 接收 int类型的数据</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// blocking mechanism</span></span><br><span class="line">x, y := &lt;-c, &lt;-c  <span class="comment">// 这句话会一直等到数据发送到c中才执行</span></span><br></pre></td></tr></table></figure>
 <h3 id="usage-of-‘select’"><a href="#usage-of-‘select’" class="headerlink" title="usage of ‘select’"></a>usage of ‘select’</h3><p>Golang中的select与C++的switch相似,但select只负责监听 <strong>IO操作</strong>. select经常用来选择一组可能的sender和receiver操作去处理. select中的case语句可以是send也可以是receive,或者default.</p>
 <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">fibonacci</span><span class="params">(c, quit <span class="keyword">chan</span> <span class="keyword">int</span>)</span></span>&#123;</span><br><span class="line">  x, y := <span class="number">0</span>, <span class="number">1</span></span><br><span class="line">  <span class="keyword">for</span>&#123;  <span class="comment">// recursively input number into c</span></span><br><span class="line">    <span class="keyword">select</span>&#123;</span><br><span class="line">    <span class="keyword">case</span> c &lt;- x:</span><br><span class="line">      x, y = y, x + y</span><br><span class="line">    <span class="keyword">case</span> &lt;-quit:</span><br><span class="line">      fmt.Println(<span class="string">"quit"</span>)</span><br><span class="line">      <span class="keyword">return</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">  c := <span class="built_in">make</span>(<span class="keyword">chan</span> <span class="keyword">int</span>)</span><br><span class="line">  quit := <span class="built_in">make</span>(<span class="keyword">chan</span> <span class="keyword">int</span>)</span><br><span class="line">  <span class="keyword">go</span> <span class="function"><span class="keyword">func</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">for</span> i := <span class="number">0</span>; i &lt; <span class="number">10</span>; i++ &#123;</span><br><span class="line">      fmt.Println(&lt;-c)  <span class="comment">// queue (at most) 10 jobs to fetch from c</span></span><br><span class="line">    &#125;</span><br><span class="line">    quit&lt;<span class="number">-0</span></span><br><span class="line">  &#125;()</span><br><span class="line">  fibonacci(c, quit);  <span class="comment">// output 0 1 1 2 3 5 8 13 21 34 quit</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -389,7 +390,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Golang/" rel="tag"># Golang</a>
+            <a href="/tags/golang/" rel="tag"># golang</a>
           
         </div>
       
@@ -493,7 +494,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-count">6</span>
                 <span class="site-state-item-name">posts</span>
               </a>
             </div>
