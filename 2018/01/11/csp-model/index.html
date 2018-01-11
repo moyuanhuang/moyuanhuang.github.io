@@ -71,7 +71,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="rails,ruby," />
+  <meta name="keywords" content="golang," />
 
 
 
@@ -87,18 +87,20 @@
 
 
 
-<meta name="description" content="The RESTfulConsider a basic rails controller where you have a series of actions: index, show, new, create, etc. It’s OK when in the starting period the number o">
-<meta name="keywords" content="rails,ruby">
+<meta name="description" content="CSP模型CSP模型是上个世纪七十年代提出的，用于描述两个独立的并发实体通过共享的通讯 channel(管道)进行通信的并发模型。 CSP中channel是第一类对象，它不关注发送消息的实体，而关注与发送消息时使用的channel。 除了CSP模型之外，还有另一种叫做actor的模型，完全没有接触过，之后慢慢学。 另：">
+<meta name="keywords" content="golang">
 <meta property="og:type" content="article">
-<meta property="og:title" content="rails basic">
-<meta property="og:url" content="http://yoursite.com/2017/04/12/rails-basic/index.html">
+<meta property="og:title" content="并发模型中的CSP模型">
+<meta property="og:url" content="http://yoursite.com/2018/01/11/csp-model/index.html">
 <meta property="og:site_name" content="my.huang">
-<meta property="og:description" content="The RESTfulConsider a basic rails controller where you have a series of actions: index, show, new, create, etc. It’s OK when in the starting period the number of this action is limited, but as the num">
+<meta property="og:description" content="CSP模型CSP模型是上个世纪七十年代提出的，用于描述两个独立的并发实体通过共享的通讯 channel(管道)进行通信的并发模型。 CSP中channel是第一类对象，它不关注发送消息的实体，而关注与发送消息时使用的channel。 除了CSP模型之外，还有另一种叫做actor的模型，完全没有接触过，之后慢慢学。 另：第一类对象（first-class citizen）在计算机中指可以在执行期创造">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2017-12-09T19:47:58.000Z">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/1767848-fc23b15dc52e407f.jpg?imageMogr2/auto-orient/">
+<meta property="og:updated_time" content="2018-01-11T16:49:12.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="rails basic">
-<meta name="twitter:description" content="The RESTfulConsider a basic rails controller where you have a series of actions: index, show, new, create, etc. It’s OK when in the starting period the number of this action is limited, but as the num">
+<meta name="twitter:title" content="并发模型中的CSP模型">
+<meta name="twitter:description" content="CSP模型CSP模型是上个世纪七十年代提出的，用于描述两个独立的并发实体通过共享的通讯 channel(管道)进行通信的并发模型。 CSP中channel是第一类对象，它不关注发送消息的实体，而关注与发送消息时使用的channel。 除了CSP模型之外，还有另一种叫做actor的模型，完全没有接触过，之后慢慢学。 另：第一类对象（first-class citizen）在计算机中指可以在执行期创造">
+<meta name="twitter:image" content="https://upload-images.jianshu.io/upload_images/1767848-fc23b15dc52e407f.jpg?imageMogr2/auto-orient/">
 
 
 
@@ -126,13 +128,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2017/04/12/rails-basic/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/01/11/csp-model/"/>
 
 
 
 
 
-  <title> rails basic | my.huang </title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  <title> 并发模型中的CSP模型 | my.huang </title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="default">
@@ -261,7 +263,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/04/12/rails-basic/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/11/csp-model/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Moyuan Huang">
@@ -282,7 +284,7 @@
             
             
               
-                rails basic
+                并发模型中的CSP模型
               
             
           </h1>
@@ -297,8 +299,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-04-12T17:58:19-07:00">
-                2017-04-12
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-01-11T08:49:12-08:00">
+                2018-01-11
               </time>
             
 
@@ -316,9 +318,9 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2017/04/12/rails-basic/#comments" itemprop="discussionUrl">
+                <a href="/2018/01/11/csp-model/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2017/04/12/rails-basic/" itemprop="commentCount"></span>
+                        data-disqus-identifier="2018/01/11/csp-model/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -344,17 +346,25 @@
       
 
       
-        <h1 id="The-RESTful"><a href="#The-RESTful" class="headerlink" title="The RESTful"></a>The RESTful</h1><p>Consider a basic rails controller where you have a series of actions: index, show, new, create, etc. It’s OK when in the starting period the number of this action is limited, but as the number of actions strat to grow, you may mess up with all those actions and result in a big messy controller. REST(Representational State Transfer) is thus designed for arranging those actions, by setup some rules or styles for the web service.</p>
-<pre><code>/events/create/     =&gt; POST /events
-/events/show/id     =&gt; GET  /events/id
-/events/update/     =&gt; PATCH /events/id
-/events/destroy/    =&gt; DELETE /events/id
-</code></pre><h1 id="Some-questions-remain-to-be-answered"><a href="#Some-questions-remain-to-be-answered" class="headerlink" title="Some questions remain to be answered."></a>Some questions remain to be answered.</h1><p>the <code>link_to</code> method in rails. <code>link_to(name = nil, options = nil, html_options = nil, &amp;block)</code>. What is the options and html_options? For example<br>    &lt;%= link_to ‘Delete’, @link, method: :destroy, data:{ confirm: ‘Are you sure?’ }, class: “btn btn-default” %&gt;</p>
-<p>Also, in what situation should we use the <code>&lt;% -%&gt;</code> instead of just <code>&lt;% %&gt;</code>?</p>
-<h1 id="Need-to-learn-more-about-the-rails-referer"><a href="#Need-to-learn-more-about-the-rails-referer" class="headerlink" title="Need to learn more about the rails referer."></a>Need to learn more about the rails <code>referer</code>.</h1><h1 id="Learn-how-render-works"><a href="#Learn-how-render-works" class="headerlink" title="Learn how render works"></a>Learn how <code>render</code> works</h1><pre><code>render &apos;new&apos;
-&lt;%= render @post.comments %&gt;
-&lt;%= render &quot;comments/form&quot; %&gt;
-</code></pre><h1 id="a-good-website-for-bootstrap-here"><a href="#a-good-website-for-bootstrap-here" class="headerlink" title="a good website for bootstrap. here"></a>a good website for bootstrap. <a href="https://www.w3schools.com/bootstrap/bootstrap_buttons.asp" target="_blank" rel="noopener">here</a></h1>
+        <h2 id="CSP模型"><a href="#CSP模型" class="headerlink" title="CSP模型"></a>CSP模型</h2><p>CSP模型是上个世纪七十年代提出的，<strong>用于描述两个独立的并发实体通过共享的通讯 channel(管道)进行通信的并发模型</strong>。 CSP中channel是<strong>第一类对象</strong>，它不关注发送消息的实体，而关注与发送消息时使用的channel。 除了CSP模型之外，还有另一种叫做actor的模型，完全没有接触过，之后慢慢学。</p>
+<p>另：<strong>第一类对象</strong>（first-class citizen）在计算机中指<em>可以在执行期创造并作为参数传递给其他函数或存入一个变量的实体</em>。 绝大多数语言中，数值与基础型别都是第一类对象，然而不同语言中对函数的区别很大，例如C语言与C++中的函数不是第一类对象，因为在这些语言中函数不能在执行期创造，而必须在设计时全部写好。相比之下，<a href="https://baike.baidu.com/item/Scheme" target="_blank" rel="noopener">Scheme</a>中的函数是第一类对象，因为可以用lambda语句来创造匿名函数并作为第一类对象来操作。</p>
+<h2 id="Golang-CSP"><a href="#Golang-CSP" class="headerlink" title="Golang CSP"></a>Golang CSP</h2><p>Golang 就是借用CSP模型的一些概念为之实现并发进行理论支持，其实从实际上出发，go语言并没有，完全实现了CSP模型的所有理论，仅仅是借用了 process和channel这两个概念。process是在go语言上的表现就是 goroutine，是实际并发执行的实体，每个实体之间是通过channel通讯来实现数据共享。</p>
+<p>这里需要提到的是goroutine的实现： goroutine底层是通过协程（coroutine）实现并发的。关于协程、线程和进程的关系之后再详细研究。使用协程具有以下优势：</p>
+<ol>
+<li>用户空间 避免了内核态和用户态的切换导致的成本</li>
+<li>可以由语言和框架层进行调度</li>
+<li>更小的栈空间允许创建大量的实例</li>
+</ol>
+<p>另外，golang为Goroutine提供语言层面的调度器，实现了高效率m:n的线程对应关系。Golang为了调度的公平性，在调度器加入了steal working 算法 ，在一个P自己的执行队列，处理完之后，它会先到全局的执行队列中偷G进行处理，如果没有的话，再会到其他P的执行队列中抢G来进行处理。</p>
+<p>图中：</p>
+<ul>
+<li>M：是内核线程</li>
+<li>P :  是调度协调，用于协调M和G的执行，内核线程只有拿到了 P才能对goroutine继续调度执行，一般都是通过限定P的个数来控制golang的并发度</li>
+<li>G : 是待执行的goroutine，包含这个goroutine的栈空间</li>
+<li>Gn : 灰色背景的Gn 是已经挂起的goroutine，它们被添加到了执行队列中，然后需要等待网络IO的goroutine，当P通过 epoll查询到特定的fd的时候，会重新调度起对应的，正在挂起的goroutine。</li>
+</ul>
+<p><img src="https://upload-images.jianshu.io/upload_images/1767848-fc23b15dc52e407f.jpg?imageMogr2/auto-orient/" alt="alt text" title="调度示意"></p>
+
       
     </div>
 
@@ -383,9 +393,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/rails/" rel="tag"># rails</a>
-          
-            <a href="/tags/ruby/" rel="tag"># ruby</a>
+            <a href="/tags/golang/" rel="tag"># golang</a>
           
         </div>
       
@@ -398,8 +406,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/04/01/link/" rel="next" title="link">
-                <i class="fa fa-chevron-left"></i> link
+              <a href="/2017/12/13/how-should-we-close-channel/" rel="next" title="如何优雅地关闭channel">
+                <i class="fa fa-chevron-left"></i> 如何优雅地关闭channel
               </a>
             
           </div>
@@ -407,10 +415,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/12/04/urlpoll/" rel="prev" title="Golang code walk: share memory by communicating">
-                Golang code walk: share memory by communicating <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -557,7 +561,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#The-RESTful"><span class="nav-number">1.</span> <span class="nav-text">The RESTful</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Some-questions-remain-to-be-answered"><span class="nav-number">2.</span> <span class="nav-text">Some questions remain to be answered.</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Need-to-learn-more-about-the-rails-referer"><span class="nav-number">3.</span> <span class="nav-text">Need to learn more about the rails referer.</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Learn-how-render-works"><span class="nav-number">4.</span> <span class="nav-text">Learn how render works</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#a-good-website-for-bootstrap-here"><span class="nav-number">5.</span> <span class="nav-text">a good website for bootstrap. here</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#CSP模型"><span class="nav-number">1.</span> <span class="nav-text">CSP模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Golang-CSP"><span class="nav-number">2.</span> <span class="nav-text">Golang CSP</span></a></li></ol></div>
             
 
           </div>
@@ -701,9 +705,9 @@
     
       <script type="text/javascript">
         var disqus_config = function () {
-          this.page.url = 'http://yoursite.com/2017/04/12/rails-basic/';
-          this.page.identifier = '2017/04/12/rails-basic/';
-          this.page.title = 'rails basic';
+          this.page.url = 'http://yoursite.com/2018/01/11/csp-model/';
+          this.page.identifier = '2018/01/11/csp-model/';
+          this.page.title = '并发模型中的CSP模型';
         };
         var d = document, s = d.createElement('script');
         s.src = 'https://https-moyuanhuang-github-io.disqus.com/embed.js';
