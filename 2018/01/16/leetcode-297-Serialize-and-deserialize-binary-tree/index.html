@@ -71,7 +71,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="rails,ruby," />
+  <meta name="keywords" content="leetcode," />
 
 
 
@@ -87,18 +87,18 @@
 
 
 
-<meta name="description" content="The RESTfulConsider a basic rails controller where you have a series of actions: index, show, new, create, etc. It’s OK when in the starting period the number o">
-<meta name="keywords" content="rails,ruby">
+<meta name="description" content="For example, you may serialize the following tree 12345   1 / \2   3   / \  4   5 as &amp;quot;[1,2,3,null,null,4,5]&amp;quot;. 这道题看似简单，写起来真是费劲。。。要注意如下几点：  如何处理">
+<meta name="keywords" content="leetcode">
 <meta property="og:type" content="article">
-<meta property="og:title" content="rails basic">
-<meta property="og:url" content="http://yoursite.com/2017/04/12/rails-basic/index.html">
+<meta property="og:title" content="leetcode 297. Serialize and deserialize binary tree">
+<meta property="og:url" content="http://yoursite.com/2018/01/16/leetcode-297-Serialize-and-deserialize-binary-tree/index.html">
 <meta property="og:site_name" content="my.huang">
-<meta property="og:description" content="The RESTfulConsider a basic rails controller where you have a series of actions: index, show, new, create, etc. It’s OK when in the starting period the number of this action is limited, but as the num">
+<meta property="og:description" content="For example, you may serialize the following tree 12345   1 / \2   3   / \  4   5 as &amp;quot;[1,2,3,null,null,4,5]&amp;quot;. 这道题看似简单，写起来真是费劲。。。要注意如下几点：  如何处理int -&amp;gt; string。如果每个节点的值都是个位数的话，那么只需要root-&amp;gt;v">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2017-12-09T19:47:58.000Z">
+<meta property="og:updated_time" content="2018-01-17T07:11:47.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="rails basic">
-<meta name="twitter:description" content="The RESTfulConsider a basic rails controller where you have a series of actions: index, show, new, create, etc. It’s OK when in the starting period the number of this action is limited, but as the num">
+<meta name="twitter:title" content="leetcode 297. Serialize and deserialize binary tree">
+<meta name="twitter:description" content="For example, you may serialize the following tree 12345   1 / \2   3   / \  4   5 as &amp;quot;[1,2,3,null,null,4,5]&amp;quot;. 这道题看似简单，写起来真是费劲。。。要注意如下几点：  如何处理int -&amp;gt; string。如果每个节点的值都是个位数的话，那么只需要root-&amp;gt;v">
 
 
 
@@ -126,13 +126,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2017/04/12/rails-basic/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/01/16/leetcode-297-Serialize-and-deserialize-binary-tree/"/>
 
 
 
 
 
-  <title> rails basic | my.huang </title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  <title> leetcode 297. Serialize and deserialize binary tree | my.huang </title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="default">
@@ -261,7 +261,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/04/12/rails-basic/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/16/leetcode-297-Serialize-and-deserialize-binary-tree/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Moyuan Huang">
@@ -282,7 +282,7 @@
             
             
               
-                rails basic
+                leetcode 297. Serialize and deserialize binary tree
               
             
           </h1>
@@ -297,8 +297,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-04-12T17:58:19-07:00">
-                2017-04-12
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-01-16T15:11:56-08:00">
+                2018-01-16
               </time>
             
 
@@ -316,9 +316,9 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2017/04/12/rails-basic/#comments" itemprop="discussionUrl">
+                <a href="/2018/01/16/leetcode-297-Serialize-and-deserialize-binary-tree/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2017/04/12/rails-basic/" itemprop="commentCount"></span>
+                        data-disqus-identifier="2018/01/16/leetcode-297-Serialize-and-deserialize-binary-tree/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -344,17 +344,17 @@
       
 
       
-        <h1 id="The-RESTful"><a href="#The-RESTful" class="headerlink" title="The RESTful"></a>The RESTful</h1><p>Consider a basic rails controller where you have a series of actions: index, show, new, create, etc. It’s OK when in the starting period the number of this action is limited, but as the number of actions strat to grow, you may mess up with all those actions and result in a big messy controller. REST(Representational State Transfer) is thus designed for arranging those actions, by setup some rules or styles for the web service.</p>
-<pre><code>/events/create/     =&gt; POST /events
-/events/show/id     =&gt; GET  /events/id
-/events/update/     =&gt; PATCH /events/id
-/events/destroy/    =&gt; DELETE /events/id
-</code></pre><h1 id="Some-questions-remain-to-be-answered"><a href="#Some-questions-remain-to-be-answered" class="headerlink" title="Some questions remain to be answered."></a>Some questions remain to be answered.</h1><p>the <code>link_to</code> method in rails. <code>link_to(name = nil, options = nil, html_options = nil, &amp;block)</code>. What is the options and html_options? For example<br>    &lt;%= link_to ‘Delete’, @link, method: :destroy, data:{ confirm: ‘Are you sure?’ }, class: “btn btn-default” %&gt;</p>
-<p>Also, in what situation should we use the <code>&lt;% -%&gt;</code> instead of just <code>&lt;% %&gt;</code>?</p>
-<h1 id="Need-to-learn-more-about-the-rails-referer"><a href="#Need-to-learn-more-about-the-rails-referer" class="headerlink" title="Need to learn more about the rails referer."></a>Need to learn more about the rails <code>referer</code>.</h1><h1 id="Learn-how-render-works"><a href="#Learn-how-render-works" class="headerlink" title="Learn how render works"></a>Learn how <code>render</code> works</h1><pre><code>render &apos;new&apos;
-&lt;%= render @post.comments %&gt;
-&lt;%= render &quot;comments/form&quot; %&gt;
-</code></pre><h1 id="a-good-website-for-bootstrap-here"><a href="#a-good-website-for-bootstrap-here" class="headerlink" title="a good website for bootstrap. here"></a>a good website for bootstrap. <a href="https://www.w3schools.com/bootstrap/bootstrap_buttons.asp" target="_blank" rel="noopener">here</a></h1>
+        <p>For example, you may serialize the following tree</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">   1</span><br><span class="line"> / \</span><br><span class="line">2   3</span><br><span class="line">   / \</span><br><span class="line">  4   5</span><br></pre></td></tr></table></figure>
+<p>as <code>&quot;[1,2,3,null,null,4,5]&quot;</code>.</p>
+<p>这道题看似简单，写起来真是费劲。。。要注意如下几点：</p>
+<ol>
+<li>如何处理<code>int -&gt; string</code>。如果每个节点的值都是个位数的话，那么只需要<code>root-&gt;val + &#39;0&#39;</code>即可转化为字符。代码写起来也相对简单。但是考虑节点值有可能不止一位，我们必须采用其他方法。最先想到的是使用to_string()方法，应该可以实现我们想要的结果。后来看到网友写的使用ostringstream。感觉很巧妙，并且代码和前者一样简介，决定采用这种方法。</li>
+<li>如何serialize。第一想法是按层遍历，但是这样会很难处理<code>nullptr</code>：如果事先不知道二叉树的层数，循环就无法跳出。因此，我们使用前序遍历来序列化整个二叉树，这样解码的时候也可以通过同样的顺序建树。</li>
+<li>如何deserialize。如前面所说，不能简单利用队列按层构建二叉树，而要用前序遍历。同时，因为我们保存的字符串使用空格分隔，最快速的方法就是istringstream解析整数值。</li>
+</ol>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// leetcode 297. Serialize and Deserialize Binary Tree</span></span><br><span class="line"><span class="comment">// HARD</span></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for a binary tree node.</span></span><br><span class="line"><span class="comment"> * struct TreeNode &#123;</span></span><br><span class="line"><span class="comment"> *     int val;</span></span><br><span class="line"><span class="comment"> *     TreeNode *left;</span></span><br><span class="line"><span class="comment"> *     TreeNode *right;</span></span><br><span class="line"><span class="comment"> *     TreeNode(int x) : val(x), left(NULL), right(NULL) &#123;&#125;</span></span><br><span class="line"><span class="comment"> * &#125;;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Codec</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="comment">// Encodes a tree to a single string.</span></span><br><span class="line">    <span class="function"><span class="built_in">string</span> <span class="title">serialize</span><span class="params">(TreeNode* root)</span> </span>&#123;</span><br><span class="line">        <span class="built_in">ostringstream</span> os;</span><br><span class="line">        serialize(root, os);</span><br><span class="line">        <span class="keyword">return</span> os.str();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Decodes your encoded data to tree.</span></span><br><span class="line">    <span class="function">TreeNode* <span class="title">deserialize</span><span class="params">(<span class="built_in">string</span> data)</span> </span>&#123;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">"len: "</span> &lt;&lt; data.size() &lt;&lt; <span class="built_in">endl</span> &lt;&lt; <span class="string">"data: "</span> &lt;&lt; data &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">        <span class="function"><span class="built_in">istringstream</span> <span class="title">is</span><span class="params">(data)</span></span>;</span><br><span class="line">        <span class="keyword">return</span> deserialize(is);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">serialize</span><span class="params">(TreeNode* root, <span class="built_in">ostringstream</span>&amp; os)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(root)&#123;</span><br><span class="line">            os &lt;&lt; root-&gt;val &lt;&lt; <span class="string">" "</span>;</span><br><span class="line">            serialize(root-&gt;left, os);</span><br><span class="line">            serialize(root-&gt;right, os);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> &#123;</span><br><span class="line">            os &lt;&lt; <span class="string">"# "</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function">TreeNode* <span class="title">deserialize</span><span class="params">(<span class="built_in">istringstream</span>&amp; is)</span></span>&#123;</span><br><span class="line">        <span class="built_in">string</span> x;</span><br><span class="line">        is &gt;&gt; x;</span><br><span class="line">        <span class="keyword">if</span>(x == <span class="string">"#"</span>)&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">nullptr</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        TreeNode* new_node = <span class="keyword">new</span> TreeNode(stoi(x));</span><br><span class="line">        new_node-&gt;left = deserialize(is);</span><br><span class="line">        new_node-&gt;right = deserialize(is);</span><br><span class="line">        <span class="keyword">return</span> new_node;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Your Codec object will be instantiated and called as such:</span></span><br><span class="line"><span class="comment">// Codec codec;</span></span><br><span class="line"><span class="comment">// codec.deserialize(codec.serialize(root));</span></span><br></pre></td></tr></table></figure>
+
       
     </div>
 
@@ -383,9 +383,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/rails/" rel="tag"># rails</a>
-          
-            <a href="/tags/ruby/" rel="tag"># ruby</a>
+            <a href="/tags/leetcode/" rel="tag"># leetcode</a>
           
         </div>
       
@@ -398,8 +396,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/04/01/link/" rel="next" title="link">
-                <i class="fa fa-chevron-left"></i> link
+              <a href="/2018/01/15/Gobs-why-defining-a-new-encoding/" rel="next" title="Gobs: why defining a new encoding?">
+                <i class="fa fa-chevron-left"></i> Gobs: why defining a new encoding?
               </a>
             
           </div>
@@ -407,10 +405,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/12/04/urlpoll/" rel="prev" title="Golang code walk: share memory by communicating">
-                Golang code walk: share memory by communicating <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -464,17 +458,8 @@
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
-            Table of Contents
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview">
-            Overview
-          </li>
-        </ul>
-      
 
-      <section class="site-overview sidebar-panel">
+      <section class="site-overview sidebar-panel sidebar-panel-active">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.png"
@@ -547,22 +532,6 @@
 
       </section>
 
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#The-RESTful"><span class="nav-number">1.</span> <span class="nav-text">The RESTful</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Some-questions-remain-to-be-answered"><span class="nav-number">2.</span> <span class="nav-text">Some questions remain to be answered.</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Need-to-learn-more-about-the-rails-referer"><span class="nav-number">3.</span> <span class="nav-text">Need to learn more about the rails referer.</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Learn-how-render-works"><span class="nav-number">4.</span> <span class="nav-text">Learn how render works</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#a-good-website-for-bootstrap-here"><span class="nav-number">5.</span> <span class="nav-text">a good website for bootstrap. here</span></a></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
       
 
       
@@ -701,9 +670,9 @@
     
       <script type="text/javascript">
         var disqus_config = function () {
-          this.page.url = 'http://yoursite.com/2017/04/12/rails-basic/';
-          this.page.identifier = '2017/04/12/rails-basic/';
-          this.page.title = 'rails basic';
+          this.page.url = 'http://yoursite.com/2018/01/16/leetcode-297-Serialize-and-deserialize-binary-tree/';
+          this.page.identifier = '2018/01/16/leetcode-297-Serialize-and-deserialize-binary-tree/';
+          this.page.title = 'leetcode 297. Serialize and deserialize binary tree';
         };
         var d = document, s = d.createElement('script');
         s.src = 'https://https-moyuanhuang-github-io.disqus.com/embed.js';
