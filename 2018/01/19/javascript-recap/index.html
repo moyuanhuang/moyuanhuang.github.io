@@ -71,7 +71,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="golang," />
+  <meta name="keywords" content="javascript," />
 
 
 
@@ -87,20 +87,18 @@
 
 
 
-<meta name="description" content="CSP模型CSP模型是上个世纪七十年代提出的，用于描述两个独立的并发实体通过共享的通讯 channel(管道)进行通信的并发模型。 CSP中channel是第一类对象，它不关注发送消息的实体，而关注与发送消息时使用的channel。 除了CSP模型之外，还有另一种叫做actor的模型，完全没有接触过，之后慢慢学。 另：">
-<meta name="keywords" content="golang">
+<meta name="description" content="General 在JS中，对象相当于大部分语言的map，以键值对的形式存在 如果将值赋给为申明的变量，该变量将自动作为全局变量，即使在函数内执行。  1carname=&quot;Volvo&quot;;  // carname will be treated as global variable  ==与===区别 ">
+<meta name="keywords" content="javascript">
 <meta property="og:type" content="article">
-<meta property="og:title" content="并发模型中的CSP模型">
-<meta property="og:url" content="http://yoursite.com/2018/01/11/csp-model/index.html">
+<meta property="og:title" content="javascript_recap">
+<meta property="og:url" content="http://yoursite.com/2018/01/19/javascript-recap/index.html">
 <meta property="og:site_name" content="my.huang">
-<meta property="og:description" content="CSP模型CSP模型是上个世纪七十年代提出的，用于描述两个独立的并发实体通过共享的通讯 channel(管道)进行通信的并发模型。 CSP中channel是第一类对象，它不关注发送消息的实体，而关注与发送消息时使用的channel。 除了CSP模型之外，还有另一种叫做actor的模型，完全没有接触过，之后慢慢学。 另：第一类对象（first-class citizen）在计算机中指可以在执行期创造">
+<meta property="og:description" content="General 在JS中，对象相当于大部分语言的map，以键值对的形式存在 如果将值赋给为申明的变量，该变量将自动作为全局变量，即使在函数内执行。  1carname=&quot;Volvo&quot;;  // carname will be treated as global variable  ==与===区别  对于 string、number 等基础类型，== 和 === 是有区别的 不同类型间比较，==">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/1767848-fc23b15dc52e407f.jpg?imageMogr2/auto-orient/">
-<meta property="og:updated_time" content="2018-01-11T16:49:12.000Z">
+<meta property="og:updated_time" content="2018-01-20T17:43:28.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="并发模型中的CSP模型">
-<meta name="twitter:description" content="CSP模型CSP模型是上个世纪七十年代提出的，用于描述两个独立的并发实体通过共享的通讯 channel(管道)进行通信的并发模型。 CSP中channel是第一类对象，它不关注发送消息的实体，而关注与发送消息时使用的channel。 除了CSP模型之外，还有另一种叫做actor的模型，完全没有接触过，之后慢慢学。 另：第一类对象（first-class citizen）在计算机中指可以在执行期创造">
-<meta name="twitter:image" content="https://upload-images.jianshu.io/upload_images/1767848-fc23b15dc52e407f.jpg?imageMogr2/auto-orient/">
+<meta name="twitter:title" content="javascript_recap">
+<meta name="twitter:description" content="General 在JS中，对象相当于大部分语言的map，以键值对的形式存在 如果将值赋给为申明的变量，该变量将自动作为全局变量，即使在函数内执行。  1carname=&quot;Volvo&quot;;  // carname will be treated as global variable  ==与===区别  对于 string、number 等基础类型，== 和 === 是有区别的 不同类型间比较，==">
 
 
 
@@ -128,13 +126,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/01/11/csp-model/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/01/19/javascript-recap/"/>
 
 
 
 
 
-  <title> 并发模型中的CSP模型 | my.huang </title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  <title> javascript_recap | my.huang </title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="default">
@@ -263,7 +261,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/11/csp-model/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/19/javascript-recap/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Moyuan Huang">
@@ -284,7 +282,7 @@
             
             
               
-                并发模型中的CSP模型
+                javascript_recap
               
             
           </h1>
@@ -299,8 +297,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-01-11T08:49:12-08:00">
-                2018-01-11
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-01-19T14:11:15-08:00">
+                2018-01-19
               </time>
             
 
@@ -318,9 +316,9 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/01/11/csp-model/#comments" itemprop="discussionUrl">
+                <a href="/2018/01/19/javascript-recap/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2018/01/11/csp-model/" itemprop="commentCount"></span>
+                        data-disqus-identifier="2018/01/19/javascript-recap/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -346,24 +344,45 @@
       
 
       
-        <h2 id="CSP模型"><a href="#CSP模型" class="headerlink" title="CSP模型"></a>CSP模型</h2><p>CSP模型是上个世纪七十年代提出的，<strong>用于描述两个独立的并发实体通过共享的通讯 channel(管道)进行通信的并发模型</strong>。 CSP中channel是<strong>第一类对象</strong>，它不关注发送消息的实体，而关注与发送消息时使用的channel。 除了CSP模型之外，还有另一种叫做actor的模型，完全没有接触过，之后慢慢学。</p>
-<p>另：<strong>第一类对象</strong>（first-class citizen）在计算机中指<em>可以在执行期创造并作为参数传递给其他函数或存入一个变量的实体</em>。 绝大多数语言中，数值与基础型别都是第一类对象，然而不同语言中对函数的区别很大，例如C语言与C++中的函数不是第一类对象，因为在这些语言中函数不能在执行期创造，而必须在设计时全部写好。相比之下，<a href="https://baike.baidu.com/item/Scheme" target="_blank" rel="noopener">Scheme</a>中的函数是第一类对象，因为可以用lambda语句来创造匿名函数并作为第一类对象来操作。</p>
-<h2 id="Golang-CSP"><a href="#Golang-CSP" class="headerlink" title="Golang CSP"></a>Golang CSP</h2><p>Golang 就是借用CSP模型的一些概念为之实现并发进行理论支持，其实从实际上出发，go语言并没有，完全实现了CSP模型的所有理论，仅仅是借用了 process和channel这两个概念。process是在go语言上的表现就是 goroutine，是实际并发执行的实体，每个实体之间是通过channel通讯来实现数据共享。</p>
-<p>这里需要提到的是goroutine的实现： goroutine底层是通过协程（coroutine）实现并发的。关于协程、线程和进程的关系之后再详细研究。使用协程具有以下优势：</p>
-<ol>
-<li>用户空间 避免了内核态和用户态的切换导致的成本</li>
-<li>可以由语言和框架层进行调度</li>
-<li>更小的栈空间允许创建大量的实例</li>
-</ol>
-<p>另外，golang为Goroutine提供语言层面的调度器，实现了高效率m:n的线程对应关系。Golang为了调度的公平性，在调度器加入了steal working 算法 ，在一个P自己的执行队列，处理完之后，它会先到全局的执行队列中偷G进行处理，如果没有的话，再会到其他P的执行队列中抢G来进行处理。</p>
-<p>图中：</p>
-<ul>
-<li>M：是内核线程</li>
-<li>P :  是调度协调，用于协调M和G的执行，内核线程只有拿到了 P才能对goroutine继续调度执行，一般都是通过限定P的个数来控制golang的并发度</li>
-<li>G : 是待执行的goroutine，包含这个goroutine的栈空间</li>
-<li>Gn : 灰色背景的Gn 是已经挂起的goroutine，它们被添加到了执行队列中，然后需要等待网络IO的goroutine，当P通过 epoll查询到特定的fd的时候，会重新调度起对应的，正在挂起的goroutine。</li>
+        <h2 id="General"><a href="#General" class="headerlink" title="General"></a>General</h2><ul>
+<li>在JS中，对象相当于大部分语言的map，以键值对的形式存在</li>
+<li>如果将值赋给为申明的变量，该变量将自动作为全局变量，即使在函数内执行。</li>
 </ul>
-<p><img src="https://upload-images.jianshu.io/upload_images/1767848-fc23b15dc52e407f.jpg?imageMogr2/auto-orient/" alt="alt text" title="调度示意"></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">carname=<span class="string">"Volvo"</span>;  <span class="comment">// carname will be treated as global variable</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li><p><code>==</code>与<code>===</code>区别</p>
+<ol>
+<li>对于 string、number 等基础类型，== 和 === 是有区别的<ul>
+<li>不同类型间比较，== 之比较 “转化成同一类型后的值” 看 “值” 是否相等，=== 如果类型不同，其结果就是不等。</li>
+<li>同类型比较，直接进行 “值” 比较，两者结果一样。</li>
+</ul>
+</li>
+<li>对于 Array,Object 等高级类型，== 和 === 是没有区别的：进行 “指针地址” 比较</li>
+<li>基础类型与高级类型，== 和 === 是有区别的<ul>
+<li>对于 ==，将高级转化为基础类型，进行 “值” 比较</li>
+<li>因为类型不同，=== 结果为 false</li>
+</ul>
+</li>
+<li>!= 为 == 的非运算，!== 为 === 的非运算</li>
+</ol>
+</li>
+<li><p>自调用<br>函数表达式可以 “自调用”。如果表达式后面紧跟 () ，则会自动调用。通过添加括号，来说明它是一个函数表达式</p>
+</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> x = <span class="string">"hello world!"</span></span><br><span class="line">&#125;)();</span><br></pre></td></tr></table></figure>
+<ul>
+<li>闭包<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">f1</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">　　　　<span class="keyword">var</span> n=<span class="number">999</span>;</span><br><span class="line">　　　　nAdd=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;n+=<span class="number">1</span>&#125;  <span class="comment">// nAdd 前没有关键字，相当于全局函数</span></span><br><span class="line">　　　　<span class="function"><span class="keyword">function</span> <span class="title">f2</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">　　　　　　alert(n);</span><br><span class="line">　　　　&#125;</span><br><span class="line">　　　　<span class="keyword">return</span> f2;</span><br><span class="line">　　&#125;</span><br><span class="line">　　<span class="keyword">var</span> result=f1();</span><br><span class="line">　　result(); <span class="comment">// 999</span></span><br><span class="line">　　nAdd();</span><br><span class="line">　　result(); <span class="comment">// 1000</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>在这段代码中，result实际上就是闭包f2函数。它一共运行了两次，第一次的值是999，第二次的值是1000。这证明了，函数f1中的局部变量n一直保存在内存中，<strong>并没有在f1调用后被自动清除</strong>。</p>
+<p>为什么会这样呢？原因就在于f1是f2的父函数，而f2被赋给了一个全局变量，这导致f2始终在内存中，而f2的存在依赖于f1，因此f1也始终在内存中，不会在调用结束后，被垃圾回收机制（garbage collection）回收。</p>
+<h2 id="ES2015"><a href="#ES2015" class="headerlink" title="ES2015"></a>ES2015</h2><ul>
+<li><p>新增箭头函数</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 传统定义函数方式</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Test</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="comment">//</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> Test = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="comment">//</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 使用箭头函数定义函数时可以省略 function 关键字</span></span><br><span class="line"><span class="keyword">const</span> Test = <span class="function">(<span class="params">...params</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="comment">//</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 该函数只有一个参数时可以简写成：</span></span><br><span class="line"><span class="keyword">const</span> Test = <span class="function"><span class="params">param</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> param;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>新增<code>let</code>修饰符：<code>let</code>是修复了<code>var</code>的作用域的一些bug，变的更加好用。<code>let</code>是更好的<code>var</code>。<code>var</code>的作用于是函数作用于，而<code>let</code>是块级别（大括号括起来的内容）。<a href="https://www.zhihu.com/question/52662013" target="_blank" rel="noopener">https://www.zhihu.com/question/52662013</a></p>
+</li>
+</ul>
 
       
     </div>
@@ -393,7 +412,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/golang/" rel="tag"># golang</a>
+            <a href="/tags/javascript/" rel="tag"># javascript</a>
           
         </div>
       
@@ -406,8 +425,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/12/13/how-should-we-close-channel/" rel="next" title="如何优雅地关闭channel">
-                <i class="fa fa-chevron-left"></i> 如何优雅地关闭channel
+              <a href="/2018/01/16/leetcode-297-Serialize-and-deserialize-binary-tree/" rel="next" title="leetcode 297. Serialize and deserialize binary tree">
+                <i class="fa fa-chevron-left"></i> leetcode 297. Serialize and deserialize binary tree
               </a>
             
           </div>
@@ -415,10 +434,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/01/12/UML/" rel="prev" title="UML">
-                UML <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -565,7 +580,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#CSP模型"><span class="nav-number">1.</span> <span class="nav-text">CSP模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Golang-CSP"><span class="nav-number">2.</span> <span class="nav-text">Golang CSP</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#General"><span class="nav-number">1.</span> <span class="nav-text">General</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ES2015"><span class="nav-number">2.</span> <span class="nav-text">ES2015</span></a></li></ol></div>
             
 
           </div>
@@ -709,9 +724,9 @@
     
       <script type="text/javascript">
         var disqus_config = function () {
-          this.page.url = 'http://yoursite.com/2018/01/11/csp-model/';
-          this.page.identifier = '2018/01/11/csp-model/';
-          this.page.title = '并发模型中的CSP模型';
+          this.page.url = 'http://yoursite.com/2018/01/19/javascript-recap/';
+          this.page.identifier = '2018/01/19/javascript-recap/';
+          this.page.title = 'javascript_recap';
         };
         var d = document, s = d.createElement('script');
         s.src = 'https://https-moyuanhuang-github-io.disqus.com/embed.js';
