@@ -95,7 +95,7 @@
 <meta property="og:site_name" content="my.huang">
 <meta property="og:description" content="General 在JS中，对象相当于大部分语言的map，以键值对的形式存在 如果将值赋给为申明的变量，该变量将自动作为全局变量，即使在函数内执行。  1carname=&quot;Volvo&quot;;  // carname will be treated as global variable  ==与===区别  对于 string、number 等基础类型，== 和 === 是有区别的 不同类型间比较，==">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-01-20T17:43:28.000Z">
+<meta property="og:updated_time" content="2018-01-22T22:02:22.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="javascript_recap">
 <meta name="twitter:description" content="General 在JS中，对象相当于大部分语言的map，以键值对的形式存在 如果将值赋给为申明的变量，该变量将自动作为全局变量，即使在函数内执行。  1carname=&quot;Volvo&quot;;  // carname will be treated as global variable  ==与===区别  对于 string、number 等基础类型，== 和 === 是有区别的 不同类型间比较，==">
@@ -383,6 +383,16 @@
 <li><p>新增<code>let</code>修饰符：<code>let</code>是修复了<code>var</code>的作用域的一些bug，变的更加好用。<code>let</code>是更好的<code>var</code>。<code>var</code>的作用于是函数作用于，而<code>let</code>是块级别（大括号括起来的内容）。<a href="https://www.zhihu.com/question/52662013" target="_blank" rel="noopener">https://www.zhihu.com/question/52662013</a></p>
 </li>
 </ul>
+<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><ul>
+<li><p><code>for...in</code> and <code>for...of</code><br>一般使用<code>for...of</code>来遍历整个数组，<code>for...in</code>会多遍历一个<code>Array.Prototype</code>属性。</p>
+</li>
+<li><p>arguments<br>Javascript中函数可以访问一个叫arguments的隐含变量。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">add</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> sum = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>, j = <span class="built_in">arguments</span>.length; i &lt; j; i++) &#123;</span><br><span class="line">    sum += <span class="built_in">arguments</span>[i];</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> sum;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">add(<span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>); <span class="comment">// 14</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>apply()</code> and <code>call()</code><br>call 和 apply 都是为了改变某个函数运行时的 context 即上下文而存在的，换句话说，就是为了改变函数体内部 this 的指向。比如，可以通过 func1.call(this, arg1, arg2); 或者 func1.apply(this, [arg1, arg2]); 来调用。以下通过<code>apply</code>实现对象的继承</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> Parent = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.name = <span class="string">"yjc"</span>;</span><br><span class="line">    <span class="keyword">this</span>.age = <span class="number">22</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> child = &#123;&#125;;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(child);<span class="comment">//Object &#123;&#125; ,空对象</span></span><br><span class="line"></span><br><span class="line">Parent.call(child);</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(child); <span class="comment">//Object &#123;name: "yjc", age: 22&#125;</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
 
       
     </div>
@@ -580,7 +590,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#General"><span class="nav-number">1.</span> <span class="nav-text">General</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ES2015"><span class="nav-number">2.</span> <span class="nav-text">ES2015</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#General"><span class="nav-number">1.</span> <span class="nav-text">General</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ES2015"><span class="nav-number">2.</span> <span class="nav-text">ES2015</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#其他"><span class="nav-number">3.</span> <span class="nav-text">其他</span></a></li></ol></div>
             
 
           </div>
